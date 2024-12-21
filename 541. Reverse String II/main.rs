@@ -44,3 +44,21 @@ impl Solution {
         vec.iter().collect()
     }
 }
+
+impl Solution {
+    pub fn reverse_str(s: String, k: i32) -> String {
+        let mut vec = s.chars().collect::<Vec<char>>();
+
+        for i in (0..vec.len()).step_by(2 * k as usize) {
+            let mut left = i;
+            let mut right = (i - 1 + k as usize).min(vec.len() - 1);
+            while (left < right) {
+                vec.swap(left, right);
+                left += 1;
+                right -= 1;
+            }
+        }
+
+        vec.into_iter().collect()
+    }
+}
