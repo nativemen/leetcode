@@ -2,95 +2,81 @@
 # 基于LLVM的代码风格，可选项有：LLVM, Google, Chromium, Mozilla, WebKit
 BasedOnStyle: LLVM
 
-# 声明变量名连续对齐
-AlignTrailingComments: true  # 行尾注释对齐
+# 对齐相关配置
+# 行尾注释对齐
+AlignTrailingComments: true
+# 在未封闭（括号的开始和结束不在同一行）的括号中的代码是否对齐
+AlignAfterOpenBracket: Align
+# 控制续行的对齐方式
+AlignOperands: true
+# 对齐连续的赋值语句
+AlignConsecutiveAssignments: false
+# 对齐连续的声明
+AlignConsecutiveDeclarations: false
+# 对齐连续的宏定义
+AlignConsecutiveMacros: false
 
+# 单行代码限制
 # 不允许较短的代码块在同一行
 AllowShortBlocksOnASingleLine: false
-
 # 不允许较短的case标签在同一行
 AllowShortCaseLabelsOnASingleLine: false
-
 # 允许空函数在一行显示
 AllowShortFunctionsOnASingleLine: Empty
-
 # 不允许较短的if语句在同一行
 AllowShortIfStatementsOnASingleLine: false
-
-# 在未封闭（括号的开始和结束不在同一行）的括号中的代码是否对齐，例如：
-AlignAfterOpenBracket: true
-
 # 不允许较短的循环体在同一行
 AllowShortLoopsOnASingleLine: false
 
+# 缩进和换行设置
 # 圆括号的换行方式
 # 可选项有：Attach, Linux, Mozilla, Stroustrup, Allman, GNU, WebKit
 BreakBeforeBraces: Attach
-
 # 在构造函数初始化时按逗号断行，并以冒号对齐
 BreakConstructorInitializersBeforeComma: true
-
+# 二元运算符换行时放在行尾
+BreakBeforeBinaryOperators: None
+# 允许在运算符后换行
+BreakAfterBinaryOperators: true
 # 每行字符的最大长度
 ColumnLimit: 120
-
+# 基础缩进宽度
+IndentWidth: 4
 # 在续行（\ 下一行）时的缩进长度
-ContinuationIndentWidth: 4
-
-# 格式兼容C++11
-Cpp11BracedListStyle: true
-
-# 禁用当前的format文件
-DisableFormat: false
-
+ContinuationIndentWidth: 8
 # switch的case标签是否缩进
 IndentCaseLabels: true
-
-# 缩进宽度
-IndentWidth: 4
-
 # public、protected 和 private 访问修饰符的缩进将向左移动 4 个空格，从而对齐到和类定义相同的缩进级别
 AccessModifierOffset: -4
 
+# 空行处理
 # 去除代码块开头的空行
 KeepEmptyLinesAtTheStartOfBlocks: false
-
-# 该模板对C, C++, ObjectiveC, ObjectiveC++都有效
-Language: Cpp
-
 # 最大连续空行数
 MaxEmptyLinesToKeep: 1
 
+# Objective-C 相关
 # 针对Objective-C的block的缩进宽度
 ObjCBlockIndentWidth: 4
-
 # 针对Objective-C的属性名后加空格
 ObjCSpaceAfterProperty: true
-
 # 针对Objective-C的协议列表前加空格
 ObjCSpaceBeforeProtocolList: true
 
-# 最多能超出ColumnLimit的字符数
-PenaltyExcessCharacter: 0
-
+# 空格规则
 # 指针向右对齐，即靠近指针变量名
 PointerAlignment: Right
-
 # 括号后加空格
 SpaceAfterCStyleCast: false
-
 # 赋值运算符前加空格
 SpaceBeforeAssignmentOperators: true
-
 # 只在条件语句的括号前加上空格
 # 可选项有：Never, ControlStatements, Always
 SpaceBeforeParens: ControlStatements
-
 # 行尾的注释前加1个空格
 SpacesBeforeTrailingComments: 1
-
 # 是否在容器字面量（@[ @"1", @"2" ]）中插入空格
 SpacesInContainerLiterals: false
-
 # 不在括号里加空格
 SpaceInEmptyParentheses: false
 SpacesInAngles: false
@@ -98,9 +84,23 @@ SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 
+# C++相关
 # 格式兼容C++11
+Cpp11BracedListStyle: true
 Standard: Cpp11
-
 # 函数是否可以在同一行
 BinPackArguments: false
 BinPackParameters: false
+
+# 惩罚权重配置
+PenaltyBreakBeforeFirstCallParameter: 1
+PenaltyBreakAssignment: 2
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakString: 1000
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 200
+
+# 其他设置
+# 禁用当前的format文件
+DisableFormat: false
