@@ -57,6 +57,7 @@ int *twoSum(int *nums, int numsSize, int target, int *returnSize) {
 
     int *array = (int *)malloc(ARRAY_SIZE * sizeof(int));
     if (array == NULL) {
+        free(info);
         return NULL;
     }
 

@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-int isPrefixOfWord(char *sentence, char *searchWord) {
+int isPrefixOfWord(char* sentence, char* searchWord) {
     int totalLen = strlen(sentence);
-    int searchLen = strlen(searchLen);
+    int searchLen = strlen(searchWord);
     int start = 0;
     int num = 0;
     for (int i = 0; i <= totalLen; i++) {

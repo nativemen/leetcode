@@ -23,7 +23,7 @@ int *plusOne(int *digits, int digitsSize, int *returnSize) {
 
     *returnSize = digitsSize + addition;
     int *returnArray = (int *)malloc((*returnSize) * sizeof(int));
-    if (returnSize == NULL) {
+    if (returnArray == NULL) {
         return NULL;
     }
 
