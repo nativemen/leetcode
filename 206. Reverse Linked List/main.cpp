@@ -1,6 +1,8 @@
 #include <stack>
+#include <vector>
 
 using std::stack;
+using std::vector;
 
 struct ListNode {
     int val;
@@ -78,6 +80,41 @@ public:
         }
 
         return head;
+    }
+};
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *reverseList(ListNode *head) {
+        if (head == nullptr) {
+            return nullptr;
+        }
+
+        vector<ListNode *> list;
+        struct ListNode *node = head;
+
+        while (node != nullptr) {
+            list.push_back(node);
+            node = node->next;
+        }
+
+        int size = list.size();
+        for (int i = 1; i < size; i++) {
+            list[i]->next = list[i - 1];
+        }
+        list[0]->next = nullptr;
+
+        return list[size - 1];
     }
 };
 

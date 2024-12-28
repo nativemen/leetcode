@@ -68,6 +68,79 @@ impl Solution {
 // }
 impl Solution {
     pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        if head == None {
+            return None;
+        }
+
+        let mut nodes = Vec::new();
+        let mut current = head;
+
+        while let Some(mut node) = current {
+            current = node.next.take();
+            nodes.push(node);
+        }
+
+        let length = nodes.len();
+        for i in 1..length {
+            nodes[i].next = Some(nodes[i - 1].to_owned());
+        }
+
+        nodes[0].next = None;
+
+       nodes.pop()
+    }
+}
+
+// Definition for singly-linked list.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+//
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
+//     }
+//   }
+// }
+impl Solution {
+    pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut prev = None;
+        let mut current = head;
+
+        while let Some(mut node) = current {
+            current = node.next.take();
+            node.next = prev;
+            prev = Some(node);
+
+        }
+
+        prev
+    }
+}
+
+// Definition for singly-linked list.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+//
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
+//     }
+//   }
+// }
+impl Solution {
+    pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         let mut prev = None;
         let mut current = head;
         let mut next = None;
