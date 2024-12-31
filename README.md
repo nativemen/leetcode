@@ -9,7 +9,7 @@ Leetcode problems solutions in C/C++/Python/Rust
 
 ### Code Statistics by Language
 - **C Total Lines**:        [![](https://tokei.rs/b1/github/nativemen/leetcode?category=code&type=C)](https://github.com/nativemen/leetcode)
-- **C++ Total Lines**:      [![](https://tokei.rs/b1/github/nativemen/leetcode?category=code&type=Cpp)](https://github.com/nativemen/leetcode)
+- **C++ Total Lines**:      [![](https://tokei.rs/b1/github/nativemen/leetcode?category=code&type=C%2b%2b,C%2b%2b%20Header)](https://github.com/nativemen/leetcode)
 - **Python Total Lines**:   [![](https://tokei.rs/b1/github/nativemen/leetcode?category=code&type=Python)](https://github.com/nativemen/leetcode)
 - **Rust Total Lines**:     [![](https://tokei.rs/b1/github/nativemen/leetcode?category=code&type=Rust)](https://github.com/nativemen/leetcode)
 - **Markdown Total Lines**: [![](https://tokei.rs/b1/github/nativemen/leetcode?category=code&type=Markdown)](https://github.com/nativemen/leetcode)
@@ -18,4 +18,4 @@ Leetcode problems solutions in C/C++/Python/Rust
 - **1st Most Used Language**:   [![](https://tokei.rs/b1/github/nativemen/leetcode?showLanguage=true&languageRank=1&label=1st%20Most%20Used%20Language)](https://github.com/nativemen/leetcode)
 - **2nd Most Used Language**:   [![](https://tokei.rs/b1/github/nativemen/leetcode?showLanguage=true&languageRank=2&label=2nd%20Most%20Used%20Language)](https://github.com/nativemen/leetcode)
 - **3rd Most Used Language**:   [![](https://tokei.rs/b1/github/nativemen/leetcode?showLanguage=true&languageRank=3&label=3rd%20Most%20Used%20Language)](https://github.com/nativemen/leetcode)
-- **4th Most Used Language**:   [![](https://tokei.rs/b1/github/nativemen/leetcode?showLanguage=true&languageRank=3&label=4th%20Most%20Used%20Language)](https://github.com/nativemen/leetcode)
+- **4th Most Used Language**:   [![](https://tokei.rs/b1/github/nativemen/leetcode?showLanguage=true&languageRank=4&label=4th%20Most%20Used%20Language)](https://github.com/nativemen/leetcode)
