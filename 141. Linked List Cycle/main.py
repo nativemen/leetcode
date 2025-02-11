@@ -1,3 +1,4 @@
+import sys
 from collections import defaultdict
 from typing import Optional
 
@@ -7,6 +8,20 @@ class ListNode:
         self.val = x
         self.next = None
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        while head is not None:
+            if head.val == sys.maxsize:
+                return True
+            head.val = sys.maxsize
+            head = head.next
+
+        return False
 
 # Definition for singly-linked list.
 # class ListNode:

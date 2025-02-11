@@ -1,5 +1,6 @@
 #include <unordered_map>
 #include <unordered_set>
+#include <climits>
 
 using std::unordered_map;
 using std::unordered_set;
@@ -10,6 +11,30 @@ struct ListNode {
     ListNode(int x)
         : val(x)
         , next(NULL) {}
+};
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        while (head != NULL) {
+            if (head->val == INT_MAX) {
+                return true;
+            }
+
+            head->val = INT_MAX;
+            head = head->next;
+        }
+
+        return false;
+    }
 };
 
 /**

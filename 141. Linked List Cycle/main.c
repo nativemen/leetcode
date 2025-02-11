@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <limits.h>
 
 struct ListNode {
     int val;
@@ -24,6 +25,26 @@ bool hasCycle(struct ListNode *head) {
         if (slow == fast) {
             return true;
         }
+    }
+
+    return false;
+}
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+bool hasCycle(struct ListNode *head) {
+    while (head != NULL) {
+        if (head->val == INT_MAX) {
+            return true;
+        }
+
+        head->val = INT_MAX;
+        head = head->next;
     }
 
     return false;
