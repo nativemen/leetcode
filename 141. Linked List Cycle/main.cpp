@@ -24,7 +24,7 @@ struct ListNode {
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        while (head != NULL) {
+        while (head != nullptr) {
             if (head->val == INT_MAX) {
                 return true;
             }
@@ -76,7 +76,7 @@ public:
     bool hasCycle(ListNode *head) {
         unordered_set<ListNode *> set;
 
-        while (head != NULL) {
+        while (head != nullptr) {
             if (set.find(head) != set.end()) {
                 return true;
             }
@@ -102,7 +102,7 @@ public:
     bool hasCycle(ListNode *head) {
         unordered_set<ListNode *> map;
 
-        while (head != NULL) {
+        while (head != nullptr) {
             if (map.contains(head)) {
                 return true;
             }
@@ -128,7 +128,7 @@ public:
     bool hasCycle(ListNode *head) {
         unordered_map<ListNode *, int> map;
 
-        while (head != NULL) {
+        while (head != nullptr) {
             if (map.find(head) != map.end()) {
                 return true;
             }
