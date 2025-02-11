@@ -74,14 +74,14 @@ public:
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        unordered_set<ListNode *> map;
+        unordered_set<ListNode *> set;
 
         while (head != NULL) {
-            if (map.find(head) != map.end()) {
+            if (set.find(head) != set.end()) {
                 return true;
             }
 
-            map.insert(head);
+            set.insert(head);
             head = head->next;
         }
 
