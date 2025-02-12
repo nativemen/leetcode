@@ -104,3 +104,5 @@ PenaltyReturnTypeOnItsOwnLine: 200
 # 其他设置
 # 禁用当前的format文件
 DisableFormat: false
+
+SortIncludes: true
