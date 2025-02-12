@@ -137,7 +137,7 @@ public class Solution {
         ListNode marker = new ListNode();
 
         while (head != null) {
-            if (head == marker) {
+            if (head.next == marker) {
                 return true;
             }
 
