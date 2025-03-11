@@ -32,3 +32,27 @@ class Solution:
                 right = 0
 
         return result
+
+
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        size = len(s)
+        if size == 0:
+            return 0
+
+        result = 0
+        stack = []
+        stack.append(-1)
+
+        for i in range(size):
+            if s[i] == "(":
+                stack.append(i)
+            else:
+                if stack:
+                    stack.pop()
+                if not stack:
+                    stack.append(i)
+                else:
+                    result = max(result, i - stack[-1])
+
+        return result

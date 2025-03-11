@@ -42,3 +42,41 @@ int longestValidParentheses(char *s) {
 
     return result;
 }
+
+static int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+int longestValidParentheses(char *s) {
+    int size = strlen(s);
+    if (size == 0) {
+        return 0;
+    }
+
+    int result = 0;
+    int top = 1;
+    int *stack = (int *)malloc((size + 1) * sizeof(int));
+    if (stack == NULL) {
+        return 0;
+    }
+    stack[0] = -1;
+
+    for (int i = 0; i < size; i++) {
+        if (s[i] == '(') {
+            stack[top++] = i;
+        } else {
+            if (top > 0) {
+                top--;
+            }
+
+            if (top == 0) {
+                stack[top++] = i;
+            } else {
+                result = max(result, i - stack[top - 1]);
+            }
+        }
+    }
+
+    free(stack);
+    return result;
+}
