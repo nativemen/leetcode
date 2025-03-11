@@ -70,3 +70,31 @@ impl Solution {
         result
     }
 }
+
+impl Solution {
+    pub fn longest_valid_parentheses(s: String) -> i32 {
+        let size = s.len();
+        if size == 0 {
+            return 0;
+        }
+
+        let mut result = 0;
+        let mut stack = Vec::new();
+        stack.push(-1);
+
+        for (i, c) in s.chars().enumerate() {
+            if c == '(' {
+                stack.push(i as i32);
+            } else {
+                stack.pop();
+                if let Some(&n) = stack.last() {
+                    result = result.max(i as i32 - n);
+                } else {
+                    stack.push(i as i32);
+                }
+            }
+        }
+
+        result
+    }
+}
