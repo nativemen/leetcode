@@ -131,7 +131,6 @@ int **generateMatrix(int n, int *returnSize, int **returnColumnSizes) {
     int bottom = n - 1;
     int num = 1;
     int total = n * n;
-    int direction = 1;
 
     while (num <= total) {
         for (int i = left; i <= right; i++) {
