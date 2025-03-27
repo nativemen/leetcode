@@ -7,25 +7,25 @@ typedef struct {
     char *strs[ARRAY_SIZE];
     int count;
     UT_hash_handle hh;
-} hashEntry;
+} HashEntry;
 
-static hashEntry *findUser(hashEntry *users, const char *id) {
-    hashEntry *user = NULL;
+static HashEntry *findUser(HashEntry *users, const char *id) {
+    HashEntry *user = NULL;
 
     HASH_FIND_STR(users, id, user);
 
     return user;
 }
 
-static void addUser(hashEntry **users, const char *id, const char *str) {
-    hashEntry *user = findUser(*users, id);
+static void addUser(HashEntry **users, const char *id, const char *str) {
+    HashEntry *user = findUser(*users, id);
 
     if (user != NULL) {
         user->strs[user->count++] = strdup(str);
         return;
     }
 
-    user = (hashEntry *)malloc(sizeof(hashEntry));
+    user = (HashEntry *)malloc(sizeof(HashEntry));
     user->id = strdup(id);
     user->strs[0] = strdup(str);
     user->count = 1;
@@ -45,7 +45,7 @@ char ***groupAnagrams(char **strs, int strsSize, int *returnSize, int **returnCo
     *returnSize = 0;
     char ***result = (char ***)calloc(strsSize, sizeof(char **));
     *returnColumnSizes = (int *)calloc(strsSize, sizeof(int));
-    hashEntry *users = NULL;
+    HashEntry *users = NULL;
 
     for (size_t i = 0; i < strsSize; i++) {
         char *id = strdup(strs[i]);
@@ -54,8 +54,8 @@ char ***groupAnagrams(char **strs, int strsSize, int *returnSize, int **returnCo
         free(id);
     }
 
-    hashEntry *user = NULL;
-    hashEntry *tmp = NULL;
+    HashEntry *user = NULL;
+    HashEntry *tmp = NULL;
     int index = 0;
 
     HASH_ITER(hh, users, user, tmp) {
