@@ -9,7 +9,7 @@ typedef struct {
     UT_hash_handle hh;
 } hashEntry;
 
-static hashEntry *find_user(hashEntry *users, const char *id) {
+static hashEntry *findUser(hashEntry *users, const char *id) {
     hashEntry *user = NULL;
 
     HASH_FIND_STR(users, id, user);
@@ -17,8 +17,8 @@ static hashEntry *find_user(hashEntry *users, const char *id) {
     return user;
 }
 
-static void add_user(hashEntry **users, const char *id, const char *str) {
-    hashEntry *user = find_user(*users, id);
+static void addUser(hashEntry **users, const char *id, const char *str) {
+    hashEntry *user = findUser(*users, id);
 
     if (user != NULL) {
         user->strs[user->count++] = strdup(str);
@@ -50,7 +50,7 @@ char ***groupAnagrams(char **strs, int strsSize, int *returnSize, int **returnCo
     for (size_t i = 0; i < strsSize; i++) {
         char *id = strdup(strs[i]);
         qsort(id, strlen(id), sizeof(char), compare);
-        add_user(&users, id, strs[i]);
+        addUser(&users, id, strs[i]);
         free(id);
     }
 
