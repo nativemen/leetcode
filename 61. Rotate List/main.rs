@@ -128,3 +128,48 @@ impl Solution {
         new_head
     }
 }
+
+// Definition for singly-linked list.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+//
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
+//     }
+//   }
+// }
+impl Solution {
+    pub fn rotate_right(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
+        let mut node = head.as_ref();
+        let mut vec = Vec::new();
+
+        while let Some(current) = node {
+            vec.push(current.val);
+            node = current.next.as_ref();
+        }
+
+        let size = vec.len();
+        if size == 0 {
+            return head;
+        }
+
+        vec.rotate_right(k as usize % size);
+
+        let mut new_head = None;
+        for i in (0..size).rev() {
+            new_head = Some(Box::new(ListNode {
+                val: vec[i],
+                next: new_head,
+            }));
+        }
+
+        new_head
+    }
+}
