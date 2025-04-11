@@ -39,5 +39,20 @@ impl TreeNode {
 use std::cell::RefCell;
 use std::rc::Rc;
 impl Solution {
-    pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {}
+    pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        if preorder.is_empty() || inorder.is_empty() {
+            return None;
+        }
+
+        if let Some(mid) = inorder.iter().position(|&x| x == preorder[0]) {
+            let mut node = TreeNode::new(preorder[0]);
+            node.left = Self::build_tree(preorder[1..mid + 1].to_vec(), inorder[..mid].to_vec());
+            node.right =
+                Self::build_tree(preorder[mid + 1..].to_vec(), inorder[mid + 1..].to_vec());
+
+            Some(Rc::new(RefCell::new(node)))
+        } else {
+            None
+        }
+    }
 }
