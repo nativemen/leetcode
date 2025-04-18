@@ -102,3 +102,60 @@ impl Solution {
         Self::build_node(&preorder, &inorder)
     }
 }
+
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+//
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+use std::cell::RefCell;
+use std::collections::HashMap;
+use std::rc::Rc;
+impl Solution {
+    fn build(
+        preorder: &[i32],
+        inorder: &[i32],
+        map: &HashMap<i32, usize>,
+        inorder_offset: usize,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
+        let current = preorder.first()?;
+        let mid = map[current] - inorder_offset;
+        let inorder_left = &inorder[..mid];
+        let inorder_right = &inorder[mid + 1..];
+        let preorder_left = &preorder[1..mid + 1];
+        let preorder_right = &preorder[mid + 1..];
+        let inorder_offset_left = inorder_offset;
+        let inorder_offset_right = mid + inorder_offset + 1;
+        let left = Self::build(preorder_left, inorder_left, map, inorder_offset_left);
+        let right = Self::build(preorder_right, inorder_right, map, inorder_offset_right);
+
+        Some(Rc::new(RefCell::new(TreeNode {
+            val: *current,
+            left,
+            right,
+        })))
+    }
+
+    pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        let map = inorder
+            .iter()
+            .enumerate()
+            .map(|(i, val)| (*val, i))
+            .collect();
+
+        Self::build(&preorder, &inorder, &map, 0)
+    }
+}
