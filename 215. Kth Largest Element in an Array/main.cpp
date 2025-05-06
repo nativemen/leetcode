@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <queue>
 #include <vector>
 
 using namespace std;
@@ -33,5 +34,59 @@ public:
         }
 
         return 0 - INDEX_OFFSET;
+    }
+};
+
+class Solution {
+public:
+    int findKthLargest(vector<int> &nums, int k) {
+        priority_queue<int, vector<int>, greater<int>> minHeap(nums.begin(), nums.begin() + k);
+
+        for (int i = k; i < nums.size(); i++) {
+            if (nums[i] > minHeap.top()) {
+                minHeap.pop();
+                minHeap.push(nums[i]);
+            }
+        }
+
+        return minHeap.top();
+    }
+};
+
+class Solution {
+    int quickSelect(vector<int> &nums, int k) {
+        int numsSize = nums.size();
+        int pivot = nums[rand() % numsSize];
+        vector<int> left;
+        vector<int> right;
+        vector<int> mid;
+        int i = 0;
+
+        while (i < numsSize) {
+            if (nums[i] < pivot) {
+                left.push_back(nums[i++]);
+            } else if (nums[i] > pivot) {
+                right.push_back(nums[i++]);
+            } else {
+                mid.push_back(nums[i++]);
+            }
+        }
+
+        if (right.size() >= k) {
+            return quickSelect(right, k);
+        } else if (right.size() + mid.size() < k) {
+            return quickSelect(left, k - right.size() - mid.size());
+        } else {
+            return pivot;
+        }
+    }
+
+public:
+    int findKthLargest(vector<int> &nums, int k) {
+        if (nums.empty() || k < 0 || k > nums.size()) {
+            return -1;
+        }
+
+        return quickSelect(nums, k);
     }
 };

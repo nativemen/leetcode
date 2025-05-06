@@ -31,3 +31,40 @@ int findKthLargest(int *nums, int numsSize, int k) {
 
     return 0 - INDEX_OFFSET;
 }
+
+static int quickSelect(int *nums, int numsSize, int k) {
+    int pivot = nums[rand() % numsSize];
+    int left[numsSize];
+    int right[numsSize];
+    int mid[numsSize];
+    int l = 0;
+    int r = 0;
+    int m = 0;
+    int i = 0;
+
+    while (i < numsSize) {
+        if (nums[i] < pivot) {
+            left[l++] = nums[i++];
+        } else if (nums[i] > pivot) {
+            right[r++] = nums[i++];
+        } else {
+            mid[m++] = nums[i++];
+        }
+    }
+
+    if (r >= k) {
+        return quickSelect(right, r, k);
+    } else if ((r + m) < k) {
+        return quickSelect(left, l, k - r - m);
+    } else {
+        return pivot;
+    }
+}
+
+int findKthLargest(int *nums, int numsSize, int k) {
+    if (nums == NULL || numsSize <= 0 || k < 0 || k > numsSize) {
+        return -1;
+    }
+
+    return quickSelect(nums, numsSize, k);
+}
