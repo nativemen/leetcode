@@ -42,19 +42,19 @@ impl Solution {
             return -1;
         }
 
-        let mut min_heap =
+        let mut max_heap =
             BinaryHeap::from_iter(nums[..k as usize].iter().map(|&num| Reverse(num)));
 
         for i in k as usize..nums.len() {
-            if let Some(&Reverse(top)) = min_heap.peek() {
+            if let Some(&Reverse(top)) = max_heap.peek() {
                 if (nums[i] > top) {
-                    min_heap.pop();
-                    min_heap.push(Reverse(nums[i]));
+                    max_heap.pop();
+                    max_heap.push(Reverse(nums[i]));
                 }
             }
         }
 
-        match min_heap.into_iter().map(|Reverse(num)| num).min() {
+        match max_heap.into_iter().map(|Reverse(num)| num).min() {
             Some(value) => value,
             _ => -1,
         }
