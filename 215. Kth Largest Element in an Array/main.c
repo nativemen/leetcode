@@ -1,3 +1,5 @@
+#include <limits.h>
+#include <stdbool.h>
 #include <stdio.h>
 
 static int compare(const void *a, const void *b) {
@@ -67,4 +69,113 @@ int findKthLargest(int *nums, int numsSize, int k) {
     }
 
     return quickSelect(nums, numsSize, k);
+}
+
+typedef struct {
+    int *arr;
+    int capacity;
+    int size;
+} MinHeap;
+
+static MinHeap *createMinHeap(int capacity) {
+    MinHeap *heap = (MinHeap *)malloc(sizeof(MinHeap));
+    heap->arr = (int *)malloc(capacity * sizeof(int));
+    heap->capacity = capacity;
+    heap->size = 0;
+    return heap;
+}
+
+static void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+static void heapifyDown(MinHeap *heap, int idx) {
+    int smallest = idx;
+    int left = 2 * idx + 1;
+    int right = 2 * idx + 2;
+
+    if (left < heap->size && heap->arr[left] < heap->arr[smallest])
+        smallest = left;
+
+    if (right < heap->size && heap->arr[right] < heap->arr[smallest])
+        smallest = right;
+
+    if (smallest != idx) {
+        swap(&heap->arr[idx], &heap->arr[smallest]);
+        heapifyDown(heap, smallest);
+    }
+}
+
+static void heapifyUp(MinHeap *heap, int idx) {
+    while (idx > 0 && heap->arr[(idx - 1) / 2] > heap->arr[idx]) {
+        swap(&heap->arr[idx], &heap->arr[(idx - 1) / 2]);
+        idx = (idx - 1) / 2;
+    }
+}
+
+static bool push(MinHeap *heap, int value) {
+    if (heap->size >= heap->capacity) {
+        printf("Heap overflow\n");
+        return false;
+    }
+
+    heap->arr[heap->size] = value;
+    heap->size++;
+    heapifyUp(heap, heap->size - 1);
+    return true;
+}
+
+static int top(MinHeap *heap) {
+    if (heap->size <= 0) {
+        printf("Heap is empty\n");
+        return INT_MIN;
+    }
+    return heap->arr[0];
+}
+
+static int pop(MinHeap *heap) {
+    if (heap->size <= 0) {
+        printf("Heap underflow\n");
+        return INT_MIN;
+    }
+
+    if (heap->size == 1) {
+        heap->size--;
+        return heap->arr[0];
+    }
+
+    int root = heap->arr[0];
+    heap->arr[0] = heap->arr[heap->size - 1];
+    heap->size--;
+    heapifyDown(heap, 0);
+
+    return root;
+}
+
+static bool isEmpty(MinHeap *heap) {
+    return heap->size == 0;
+}
+
+static void freeHeap(MinHeap *heap) {
+    free(heap->arr);
+    free(heap);
+}
+
+int findKthLargest(int *nums, int numsSize, int k) {
+    MinHeap *minHeap = createMinHeap(k);
+
+    for (int i = 0; i < k; i++) {
+        push(minHeap, nums[i]);
+    }
+
+    for (int i = k; i < numsSize; i++) {
+        if (nums[i] > top(minHeap)) {
+            pop(minHeap);
+            push(minHeap, nums[i]);
+        }
+    }
+
+    return top(minHeap);
 }
