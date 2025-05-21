@@ -45,3 +45,43 @@ impl Solution {
         return false;
     }
 }
+
+impl Solution {
+    pub fn can_finish(num_courses: i32, prerequisites: Vec<Vec<i32>>) -> bool {
+        if num_courses == 1 || prerequisites.len() <= 1 {
+            return true;
+        }
+
+        let mut adj = vec![vec![]; num_courses as usize];
+        let mut indegree = vec![0; num_courses as usize];
+
+        for prerequisite in prerequisites {
+            adj[prerequisite[0] as usize].push(prerequisite[1] as usize);
+            indegree[prerequisite[1] as usize] += 1;
+        }
+
+        let mut q = Vec::new();
+
+        for i in 0..num_courses as usize {
+            if indegree[i] == 0 {
+                q.push(i);
+            }
+        }
+
+        let mut count = 0;
+
+        while !q.is_empty() {
+            let course = q.remove(0);
+            count += 1;
+
+            for &neighbor in adj[course].iter() {
+                indegree[neighbor] -= 1;
+                if indegree[neighbor] == 0 {
+                    q.push(neighbor);
+                }
+            }
+        }
+
+        count == num_courses
+    }
+}
