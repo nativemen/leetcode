@@ -1,0 +1,87 @@
+#include <string>
+
+using namespace std;
+
+class Solution {
+    bool isVowel(char c) {
+        const char vowels[] = "aeiouAEIOU";
+        size_t size = sizeof(vowels) / sizeof(char);
+
+        for (size_t i = 0; i < size; i++) {
+            if (c == vowels[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+public:
+    string reverseVowels(string s) {
+        int len = s.size();
+        int left = 0;
+        int right = len - 1;
+
+        while (left < right) {
+            while (left < len && !isVowel(s[left])) {
+                left++;
+            }
+
+            while (right >= 0 && !isVowel(s[right])) {
+                right--;
+            }
+
+            if (left < right) {
+                char tmp = s[left];
+                s[left] = s[right];
+                s[right] = tmp;
+                left++;
+                right--;
+            }
+        }
+
+        return s;
+    }
+};
+
+class Solution {
+    bool isVowel(char c) {
+        const char vowels[] = "aeiouAEIOU";
+        size_t size = sizeof(vowels) / sizeof(char);
+
+        for (size_t i = 0; i < size; i++) {
+            if (c == vowels[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+public:
+    string reverseVowels(string s) {
+        int len = s.size();
+        int left = 0;
+        int right = len - 1;
+
+        while (left < right) {
+            if (!isVowel(s[left])) {
+                left++;
+            }
+
+            if (!isVowel(s[right])) {
+                right--;
+            }
+
+            if (isVowel(s[left]) && isVowel(s[right])) {
+                char tmp = s[left];
+                s[left] = s[right];
+                s[right] = tmp;
+                left++;
+                right--;
+            }
+        }
+
+        return s;
+    }
+};
