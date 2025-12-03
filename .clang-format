@@ -43,7 +43,7 @@ ColumnLimit: 120
 # 基础缩进宽度
 IndentWidth: 4
 # 在续行（\ 下一行）时的缩进长度
-ContinuationIndentWidth: 8
+ContinuationIndentWidth: 4
 # switch的case标签是否缩进
 IndentCaseLabels: true
 # public、protected 和 private 访问修饰符的缩进将向左移动 4 个空格，从而对齐到和类定义相同的缩进级别
